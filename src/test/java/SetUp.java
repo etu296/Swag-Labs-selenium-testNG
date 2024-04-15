@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -40,26 +41,32 @@ public class SetUp {
         Thread.sleep(2000);
     }
 
-//    @Test (priority = 0, description = "login into the website with valid credensial")
-//
-//    public void logIn() throws Exception
-//    {
-//        // visit website
-//        driver.get("https://www.saucedemo.com/");
-//        Thread.sleep(1000);
-//        // login
-//        //enter username
-//        List<WebElement> userName = driver.findElements(By.id("user-name"));
-//        userName.get(0).sendKeys("standard_user");
-//        Thread.sleep(1000);
-//        //enter password
-//        List<WebElement> password = driver.findElements(By.id("password"));
-//        password.get(0).sendKeys("secret_sauce");
-//        Thread.sleep(1000);
-//        //click ok login button
-//        driver.findElement(By.id("login-button")).click();
-//        Thread.sleep(2000);
-//    }
+    @Test (priority = 0, description = "login into the website with valid credensial")
+
+    public void logIn() throws Exception
+    {
+        // visit website
+        driver.get("https://www.saucedemo.com/");
+        Thread.sleep(1000);
+        // login
+        //enter username
+        List<WebElement> userName = driver.findElements(By.id("user-name"));
+        userName.get(0).sendKeys("standard_user12");
+        Thread.sleep(1000);
+        //enter password
+        List<WebElement> password = driver.findElements(By.id("password"));
+        password.get(0).sendKeys("secret_sauce");
+        Thread.sleep(1000);
+        //click ok login button
+        driver.findElement(By.id("login-button")).click();
+        Thread.sleep(2000);
+        //verify error message
+        WebElement errorMessage = driver.findElement(By.className("error-button"));
+        Assert.assertTrue(errorMessage.isDisplayed());
+        Assert.assertEquals("Username and password do not match any user in this service", errorMessage.getText());
+
+
+    }
 
 
 
